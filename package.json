@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git://github.com/Talon876/osrs-toolkit.git"
   },
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
