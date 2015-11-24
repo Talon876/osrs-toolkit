@@ -2,10 +2,15 @@
   "name": "osrs-toolkit",
   "version": "1.0.0",
   "description": "A set of APIs, tools and calculators for Old School RuneScape.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Talon876/osrs-toolkit.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec",
+    "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "keywords": [
     "osrs",
@@ -26,8 +31,10 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "coveralls": "^2.11.4",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.4",
+    "mocha-lcov-reporter": "^1.0.0",
     "nock": "^3.2.0"
   }
 }
