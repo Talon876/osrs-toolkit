@@ -94,4 +94,14 @@ describe('Mocked Hiscore API', function () {
             done();
         });
     });
+
+    it('can communicate with Jagex servers', function (done) {
+        this.slow(1000);
+        nock.cleanAll();
+        hiscore.standard('king_karthas', function (err, data) {
+            expect(err).to.be.a('null');
+            expect(data).to.not.be.a('null');
+            done();
+        });
+    });
 });
