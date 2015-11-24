@@ -5,15 +5,48 @@ var chai = require('chai'),
 
 describe('Mocked Hiscore API', function () {
     this.slow(100);
-    var createNock = function (player) {
+    var createNock = function (player, mode) {
+        if(mode === undefined) {
+            mode = '';
+        }
         return nock('http://services.runescape.com')
-            .get('/m=hiscore_oldschool/index_lite.ws')
+            .get('/m=hiscore_oldschool' + mode + '/index_lite.ws')
             .query({player: player});
     };
 
     it('can download standard hiscores', function (done) {
         var fakeApi = createNock('zezima').replyWithFile(200, __dirname + '/resources/hiscore.csv');
         hiscore.standard('zezima', function (err, data) {
+            expect(err).to.be.a('null');
+            expect(data).to.not.be.a('null');
+            fakeApi.isDone();
+            done();
+        });
+    });
+
+    it('can download ironman hiscores', function(done) {
+        var fakeApi = createNock('zezima', '_ironman').replyWithFile(200, __dirname + '/resources/hiscore.csv');
+        hiscore.ironman('zezima', function (err, data) {
+            expect(err).to.be.a('null');
+            expect(data).to.not.be.a('null');
+            fakeApi.isDone();
+            done();
+        });
+    });
+
+    it('can download ultimate ironman hiscores', function(done) {
+        var fakeApi = createNock('zezima', '_ultimate').replyWithFile(200, __dirname + '/resources/hiscore.csv');
+        hiscore.ultimate('zezima', function (err, data) {
+            expect(err).to.be.a('null');
+            expect(data).to.not.be.a('null');
+            fakeApi.isDone();
+            done();
+        });
+    });
+
+    it('can download deadman hiscores', function(done) {
+        var fakeApi = createNock('zezima', '_deadman').replyWithFile(200, __dirname + '/resources/hiscore.csv');
+        hiscore.deadman('zezima', function (err, data) {
             expect(err).to.be.a('null');
             expect(data).to.not.be.a('null');
             fakeApi.isDone();
