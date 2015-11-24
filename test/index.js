@@ -62,9 +62,9 @@ describe('Mocked Hiscore API', function () {
         });
     });
 
-    it('does not blow up if server errors out', function(done) {
+    it('does not blow up if server errors out', function (done) {
         var fakeApi = createNock('zezima').replyWithError('oh noes!');
-        hiscore.standard('zezima', function(err, data) {
+        hiscore.standard('zezima', function (err, data) {
             expect(data).to.be.a('undefined');
             expect(err.message).to.contain('unknown error occurred');
             expect(err.message).to.contain('retrieve hiscores for zezima');
@@ -74,9 +74,9 @@ describe('Mocked Hiscore API', function () {
         });
     });
 
-    it('does not blow up if server responds with nonsense', function(done) {
+    it('does not blow up if server responds with nonsense', function (done) {
         var fakeApi = createNock('zezima').reply(200, 'this was unexpected');
-        hiscore.standard('zezima', function(err, data) {
+        hiscore.standard('zezima', function (err, data) {
             expect(data).to.be.a('undefined');
             expect(err.message).to.contain('unknown error occurred while parsing');
             expect(err.message).to.contain('Try again soon');
@@ -85,10 +85,10 @@ describe('Mocked Hiscore API', function () {
         });
     });
 
-    it('can communicate with Jagex servers', function(done) {
+    it('can communicate with Jagex servers', function (done) {
         this.slow(1000);
         nock.cleanAll();
-        hiscore.standard('king_karthas', function(err, data) {
+        hiscore.standard('king_karthas', function (err, data) {
             expect(err).to.be.a('null');
             expect(data).to.not.be.a('null');
             done();
