@@ -1,5 +1,7 @@
-var hiscore = require('./lib/hiscore');
+var hiscore = require('./lib/hiscore'),
+	xp 		= require('./lib/xp');
 
 module.exports = {
-    hiscore: hiscore
+    hiscore: hiscore,
+	xp: xp
 };
